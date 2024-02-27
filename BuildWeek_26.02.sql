@@ -305,4 +305,4 @@ insert into transazione(transazione_id,cliente_id,auto_id,data,tipo,prezzo,conce
 (197, 41, 73, '2008-10-12', 'acquisizione', 16686, 156),
 (198, 95, 46, '2017-05-05', 'vendita', 87210, 60),
 (199, 59, 98, '2010-02-18', 'acquisizione', 41251, 103),
-(200, 79, 56, '2005-09-09', 'vendita', 52159, 68
+(200, 79, 56, '2005-09-09', 'vendita', 52159, 68);
