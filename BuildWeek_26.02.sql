@@ -16,11 +16,12 @@ responsabile varchar(50)
 create table auto(
 auto_id int auto_increment primary key ,
 marca varchar(50) ,
-targa varchar UNIQUE NOT NULL (15) ,
+targa varchar(15) NOT NULL ,
 colore varchar (20) ,
 cilindrata varchar(20) ,
 tipo_cambio varchar(20) ,
-prezzo decimal (7,2) NOT NULL );
+prezzo decimal (7,2) NOT NULL 
+);
 
 create table cliente(
 cliente_id int auto_increment primary key ,
@@ -110,6 +111,14 @@ insert into concessionaria(città,indirizzo,numero, telefono,responsabile) value
 ('Asti', 'Corso Alfieri', '56', '0141 223344', 'Martina Greco'),
 ('Ragusa', 'Via Roma', '45', '0932 998877', 'Luca Esposito')
 ;
+
+/*Non 10.000 che non avevamo record*/
+select * from auto where prezzo > 25000;
+
+select distinct clt.cliente_id, clt.nome, clt.cognome, clt.residenza, clt.recapito from auto aut join transazione trz on aut.auto_id = trz.auto_id
+join cliente clt on clt.cliente_id = trz.cliente_id where aut.colore = "Rosso" order by clt.nome asc;
+
+
 
 
 
