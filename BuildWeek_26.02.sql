@@ -5,49 +5,49 @@ create schema secondauto;
 use secondauto;
 
 create table concessionaria (
-concessionaria_id int auto_increment primary key not null,
-città varchar (50) not null,
-indirizzo varchar(100) not null,
-numero int not null,
-telefono varchar(15) not null,
-responsabile varchar(50) not null
+concessionaria_id int auto_increment primary key ,
+città varchar(50) NOT NULL,
+indirizzo varchar(100) ,
+numero int ,
+telefono varchar(15) ,
+responsabile varchar(50) 
 );
 
 create table auto(
-auto_id int auto_increment primary key not null,
-marca varchar(50) not null,
-targa varchar (15) not null,
-colore varchar (20) not null,
-cilindrata varchar(20) not null,
-tipo_cambio varchar(20) not null,
-prezzo decimal (7,2) NOT NULL);
+auto_id int auto_increment primary key ,
+marca varchar(50) ,
+targa varchar UNIQUE NOT NULL (15) ,
+colore varchar (20) ,
+cilindrata varchar(20) ,
+tipo_cambio varchar(20) ,
+prezzo decimal (7,2) NOT NULL );
 
 create table cliente(
-cliente_id int auto_increment primary key not null,
-nome varchar (50) not null,
-cognome varchar (50) not null,
-residenza varchar (100) not null,
-recapito varchar(20) not null
+cliente_id int auto_increment primary key ,
+nome varchar (50) ,
+cognome varchar (50) ,
+residenza varchar (100) ,
+recapito varchar(20) 
 );
 
 create table deposito(
-deposito_id int auto_increment primary key not null,
-auto_id int not null,
-concessionaria_id int not null,
-data_ingresso date not null,
-data_uscita date not null,
+deposito_id int auto_increment primary key ,
+auto_id int NOT NULL,
+concessionaria_id int NOT NULL ,
+data_ingresso date NOT NULL,
+data_uscita date ,
 foreign key (auto_id) references auto(auto_id),
 foreign key (concessionaria_id) references concessionaria(concessionaria_id)
 );
 
 create table transazione(
-transazione_id int auto_increment primary key not null,
-cliente_id int not null,
-auto_id int not null,
-data date not null,
-tipo varchar(50) not null,
-prezzo decimal(7,2) not null,
-concessionaria_id int not null,
+transazione_id int auto_increment primary key ,
+cliente_id int NOT NULL ,
+auto_id int NOT NULL ,
+data date NOT NULL ,
+tipo varchar(50) NOT NULL,
+prezzo decimal(7,2) NOT NULL,
+concessionaria_id int NOT NULL,
 foreign key (cliente_id) references cliente(cliente_id),
 foreign key (auto_id) references auto(auto_id),
 foreign key (concessionaria_id) references concessionaria(concessionaria_id)
