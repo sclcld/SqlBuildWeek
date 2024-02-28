@@ -9,6 +9,7 @@ from datetime import date, timedelta
 TEL = "123456"
 
 #le macchine verranno generate da una combinazione randomica dei seguenti valori
+
 marche = ["BMW", "Audi", "Mercedes", "Toyota"]
 colori = ["rosso", "verde", "blu", "giallo", "arancione", "viola", "rosa", "marrone", "grigio", "nero"]
 lettere_maiuscole = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -60,12 +61,15 @@ cognomi = [
 
 #mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata uniccombinando lettere ed un numero
 #da 100 a 999. Creo una lista e la ripulisco dai duplicati convertendola in set prima di riconvertirla in lista
+
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for numero_targhe in range(1000)]
 targhe = list(set(targhe))
 
-#creo un dizionario macchina : prezzo in modo da avere coerenza nei record successivi
+#creo un dizionario macchina : prezzo in modo da garantire coerenza nei record successivi
+
 prezzi = {}
 macchine = []
+
 for x in range(1,1001):
 
     marca = choice(marche)
