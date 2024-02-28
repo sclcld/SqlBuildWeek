@@ -31,7 +31,7 @@ personaggi_Italiani= [
     "Silvio Berlusconi", "Aldo Moro", "Enrico Berlinguer", "Giulio Andreotti", "Bettino Craxi", "Palmiro Togliatti",
     "Giovanni Leone", "Giuliano Amato", "Franco Frattini", "Gianfranco Fini", "Emma Bonino", "Ciriaco De Mita",
     "Giuseppe Saragat", "Romano Prodi", "Giorgio Napolitano", "Giuseppe Garibaldi II", "Alcide De Gasperi",
-    "Antonio Di Pietro", "Rita Levi-Montalcini", "Massimo D'Alema", "Carlo Azeglio Ciampi", "Giorgio Almirante",
+    "Antonio Di Pietro", "Rita Levi-Montalcini", "Massimo D Alema", "Carlo Azeglio Ciampi", "Giorgio Almirante",
     "Giulietto Chiesa", "Giovanni Falcone", "Paolo Borsellino", "Enrico Mattei", "Giorgio La Pira", "Aldo Aniasi"
 ]
 nomi = [
@@ -55,7 +55,7 @@ cognomi = [
     "Longo", "Gentile", "Martinelli", "Vitale", "Lombardo", "Serra", "Coppola", "De Santis", "Paris", "Fiore",
     "De Angelis", "Marchetti", "De Rosa", "Coppola", "Pellegrini", "Palumbo", "Sorrentino", "Amato", "De Filippo",
     "De Luca", "Pellegrino", "Caputo", "Villa", "Conte", "Ferri", "Fabbri", "Cattaneo", "Morelli", "Grasso",
-    "Gallo", "D'Amico", "Mazza", "Giuliani", "Rossetti", "Palmieri", "Bernardi", "Martino", "Catalano"
+    "Gallo", "D Amico", "Mazza", "Giuliani", "Rossetti", "Palmieri", "Bernardi", "Martino", "Catalano"
 ]
 
 #mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata uniccombinando lettere ed un numero
