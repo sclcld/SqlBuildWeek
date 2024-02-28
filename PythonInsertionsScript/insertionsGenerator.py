@@ -106,8 +106,8 @@ for x in range(1, 601):
 
 #deposito
 #deposito combina due id che rientrano nei range necessari e genera una data di entrata ed una eventuale data di uscita
-#la data di entrata viene selezionata casualmente in una lista(range) di date, la data d'uscita verrà generata (quando
-#non NULL) aggiungendo da 30 a 600 giorni alla data iniziale.
+#la data di entrata viene selezionata casualmente in una lista(range) di date, la data d'uscita verrà generata (se
+#not NULL) aggiungendo da 30 a 600 giorni alla data iniziale.
 #per creare anche la tabella delle transazioni cercando di mantenere un minimo di coerenza nel dato(anche se in un modo 
 #un po' naive e ancora da testare), prende spunto esattamente dalla crezione delle date, la data di ingresso corrisponderà 
 #ad una transazione di "acquisizione", la data di uscita corrisponderà(se not NULL) ad una transazione di vendita 
