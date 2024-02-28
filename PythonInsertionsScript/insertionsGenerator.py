@@ -1,5 +1,5 @@
  # il codice si baserà su una serie di produzioni e selezioni randomiche di valori che verranno correlate 
-#tra loro tramite dizionari python. Le liste dalle qua avvengono le scelte sono sta generate in gran parte con 
+#tra loro tramite dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
 #chat gpt. 
 #ci sono tante migliorie da effettuare, ma il tempo è tiranno.
 
@@ -7,6 +7,7 @@ from random import randint, choice, shuffle
 from datetime import date, timedelta
 
 TEL = "123456"
+
 #le macchine verranno generate da una combinazione randomica dei seguenti valori
 marche = ["BMW", "Audi", "Mercedes", "Toyota"]
 colori = ["rosso", "verde", "blu", "giallo", "arancione", "viola", "rosa", "marrone", "grigio", "nero"]
@@ -57,7 +58,7 @@ cognomi = [
     "Gallo", "D'Amico", "Mazza", "Giuliani", "Rossetti", "Palmieri", "Bernardi", "Martino", "Catalano"
 ]
 
-#mentre il numero di telefono sarà un valore di default, la targa viene generata unicamanete combinando lettere ed un numero
+#mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata uniccombinando lettere ed un numero
 #da 100 a 999. Creo una lista e la ripulisco dai duplicati convertendola in set prima di riconvertirla in lista
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for numero_targhe in range(1000)]
 targhe = list(set(targhe))
@@ -80,7 +81,7 @@ for x in range(1,1001):
 #FILIALI
     
 #viene combinata una citta, un'indicazione toponomastica, un personaggio italiano a caso(avevo chiesto 
-# a chat gpt solo personaggi italiani deceduti e lui di risposta ha inserito nella lista "Massimo D'Alema" e 
+# a chat gpt solo personaggi italiani deceduti e lui di tutta risposta ha inserito nella lista Massimo D'Alema e 
 #Gianfranco Fini) un numero civico, il valore TEL ed un nome
     
 filiali = []    
@@ -105,10 +106,10 @@ for x in range(1, 601):
 
 #deposito
 #deposito combina due id che rientrano nei range necessari e genera una data di entrata ed una eventuale data di uscita
-#se la data di entrata viene selezionata casualmente in una lista(range) di date, la data d'uscita verrà generata (quando
+#la data di entrata viene selezionata casualmente in una lista(range) di date, la data d'uscita verrà generata (quando
 #non NULL) aggiungendo da 30 a 600 giorni alla data iniziale.
 #per creare anche la tabella delle transazioni cercando di mantenere un minimo di coerenza nel dato(anche se in un modo 
-#un po' naiv e ancora da testare), prende spunto esattamente dalla crezione delle date, la data di ingresso corrisponderà 
+#un po' naive e ancora da testare), prende spunto esattamente dalla crezione delle date, la data di ingresso corrisponderà 
 #ad una transazione di "acquisizione", la data di uscita corrisponderà(se not NULL) ad una transazione di vendita 
 deposito = []
 transazioni = []
@@ -135,8 +136,8 @@ for x in range(1, 1100):
 
 
 
-#con with open genero dei file che sono perfettamente formattati per essere direttamente inseriti nell'insertion
-#basta copiari sullo script di sql e funzioneranno. Basta solo levare la virgola dopo l'ultimo record :)        
+#con with open genero dei file che sono perfettamente formattati per essere direttamente incollati nell'insertion
+# sullo script di sql e funzioneranno. Basta solo levare la virgola dopo l'ultimo record di ogni tabella :)        
 with open("insertions/auto.txt", "a") as file_auto:
 
     for car in macchine:
