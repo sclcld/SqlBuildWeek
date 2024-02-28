@@ -78,8 +78,7 @@ for x in range(1,1001):
     macchine.append(macchina)
     prezzi[x] = prezzo
 
-#FILIALI
-    
+#FILIALI   
 #viene combinata una citta, un'indicazione toponomastica, un personaggio italiano a caso(avevo chiesto 
 # a chat gpt solo personaggi italiani deceduti e di tutta risposta ha inserito nella lista Massimo D'Alema e 
 #Gianfranco Fini) un numero civico, il valore TEL ed un nome
@@ -94,6 +93,7 @@ for x in range(1,51):
 
 #CLIENTI 
 #il processo di creazione dei clienti avviene più o meno nello stesso modo del precedente
+
 clienti= []    
 for x in range(1, 601):
 
@@ -104,16 +104,16 @@ for x in range(1, 601):
     clienti.append(cliente)
 
 
-#deposito
+#DEPOSITO
 #deposito combina due id che rientrano nei range necessari e genera una data di entrata ed una eventuale data di uscita
 #la data di entrata viene selezionata casualmente in una lista(range) di date, la data d'uscita verrà generata (se
 #not NULL) aggiungendo da 30 a 600 giorni alla data iniziale.
 #per creare anche la tabella delle transazioni cercando di mantenere un minimo di coerenza nel dato(anche se in un modo 
 #un po' naive e ancora da testare), prende spunto esattamente dalla crezione delle date, la data di ingresso corrisponderà 
 #ad una transazione di "acquisizione", la data di uscita corrisponderà(se not NULL) ad una transazione di vendita 
+
 deposito = []
 transazioni = []
-
 
 for x in range(1, 1100):
 
@@ -134,10 +134,9 @@ for x in range(1, 1100):
         transazioni.append(f"('{cliente}', '{macchina}', '{str(uscita)}', 'vendita', '{prezzi[macchina]}')")
 
 
-
-
 #con with open genero dei file che sono perfettamente formattati per essere direttamente incollati nell'insertion
-# sullo script di sql e funzioneranno. Basta solo levare la virgola dopo l'ultimo record di ogni tabella :)        
+# sullo script di sql. Basta solo levare la virgola dopo l'ultimo record di ogni tabella e noo genereranno errore :)   
+
 with open("insertions/auto.txt", "a") as file_auto:
 
     for car in macchine:
