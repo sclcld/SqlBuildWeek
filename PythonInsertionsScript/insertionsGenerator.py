@@ -1,7 +1,7 @@
  # il codice si baserà su una serie di produzioni e selezioni randomiche di valori che verranno correlate 
-#tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
+#tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
 #chat gpt. 
-#ci sono tante migliorie da effettuare, ma il tempo è tiranno.
+#ci sono tante migliorie da apportare, ma il tempo è tiranno.
 
 from random import randint, choice
 from datetime import date, timedelta
@@ -58,7 +58,7 @@ cognomi = [
     "Gallo", "D Amico", "Mazza", "Giuliani", "Rossetti", "Palmieri", "Bernardi", "Martino", "Catalano"
 ]
 
-#mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata uniccombinando lettere ed un numero
+#mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata combinando lettere ed un numero
 #da 100 a 999. Creo una lista e la ripulisco dai duplicati convertendola in set per poi riconvertirla in lista
 
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for numero_targhe in range(1000)]
@@ -139,7 +139,7 @@ for x in range(1, 1100):
         idTransazioni += 1
 
 #con with open genero dei file che sono perfettamente formattati per essere direttamente incollati nell'insertion
-# sullo script di sql. Basta solo levare la virgola dopo l'ultimo record di ogni tabella e noo genereranno errore :)   
+# sullo script di sql. Basta solo levare la virgola dopo l'ultimo record di ogni tabella e non genereranno errore :)   
 
 with open("insertions/auto.txt", "a") as file_auto:
 
