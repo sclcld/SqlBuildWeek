@@ -72,7 +72,7 @@ macchine = []
 for x in range(1,1001):
 
     marca = choice(marche)
-    targa = choice(targhe)
+    targa = targhe.pop()
     colore = choice(colori)
     cil = choice(cilindrate)
     camb = choice(cambio)
