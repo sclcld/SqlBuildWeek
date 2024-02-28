@@ -1,7 +1,7 @@
-drop schema if exists secondauto2;
-create schema secondauto2;
+drop schema if exists secondauto;
+create schema secondauto;
 
-use secondauto2;
+use secondauto;
 
 create table concessionaria (
 concessionaria_id int auto_increment primary key ,
