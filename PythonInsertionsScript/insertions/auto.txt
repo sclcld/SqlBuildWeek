@@ -1096,4 +1096,4 @@
 (1096, 'Audi', 'UT611QF', 'giallo', 2200, 'Automatico', 77312),
 (1097, 'Toyota', 'JT144US', 'nero', 1800, 'Automatico', 23620),
 (1098, 'Toyota', 'IT534ZM', 'giallo', 2600, 'Automatico', 65986),
-(1099, 'Mercedes', 'RR589JV', 'rosa', 2600, 'Automatico', 70928),
+(1099, 'Mercedes', 'RR589JV', 'rosa', 2600, 'Automatico', 70928);
