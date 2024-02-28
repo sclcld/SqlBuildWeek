@@ -1,9 +1,9 @@
  # il codice si baserà su una serie di produzioni e selezioni randomiche di valori che verranno correlate 
-#tra loro tramite dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
+#tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
 #chat gpt. 
 #ci sono tante migliorie da effettuare, ma il tempo è tiranno.
 
-from random import randint, choice, shuffle
+from random import randint, choice
 from datetime import date, timedelta
 
 TEL = "123456"
@@ -15,7 +15,6 @@ colori = ["rosso", "verde", "blu", "giallo", "arancione", "viola", "rosa", "marr
 lettere_maiuscole = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 cilindrate = ["1.2L", "1.6L", "2.0L", "2.5L", "3.0L", "3.5L", "4.0L", "4.5L", "5.0L", "5.5L"]
 cambio = ["Manuale", "Automatico"]
-data_inizio = "2010-01-01"
 citta_italiane = ["Milano", "Roma", "Napoli", "Torino", "Palermo", "Genova", "Bologna", "Firenze", "Bari", "Catania",
                   "Venezia", "Verona", "Messina", "Padova", "Trieste", "Brescia", "Parma", "Taranto", "Prato", "Modena",
                   "Reggio Calabria", "Reggio Emilia", "Perugia", "Livorno", "Cagliari", "Forlì", "Ravenna", "Rimini",
@@ -60,7 +59,7 @@ cognomi = [
 ]
 
 #mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata uniccombinando lettere ed un numero
-#da 100 a 999. Creo una lista e la ripulisco dai duplicati convertendola in set prima di riconvertirla in lista
+#da 100 a 999. Creo una lista e la ripulisco dai duplicati convertendola in set per poi riconvertirla in lista
 
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for numero_targhe in range(1000)]
 targhe = list(set(targhe))
@@ -113,8 +112,8 @@ for x in range(1, 601):
 #la data di entrata viene selezionata casualmente in una lista(range) di date, la data d'uscita verrà generata (se
 #not NULL) aggiungendo da 30 a 600 giorni alla data iniziale.
 #per creare anche la tabella delle transazioni cercando di mantenere un minimo di coerenza nel dato(anche se in un modo 
-#un po' naive e ancora da testare), prende spunto esattamente dalla crezione delle date, la data di ingresso corrisponderà 
-#ad una transazione di "acquisizione", la data di uscita corrisponderà(se not NULL) ad una transazione di vendita 
+#un po' naive e ancora da testare), si prende spunto esattamente dalla crezione delle date, la data di ingresso corrisponderà 
+#ad una transazione di "acquisizione", la data di uscita corrisponderà(se not NULL) ad una transazione di "vendita" 
 
 deposito = []
 transazioni = []
@@ -132,8 +131,8 @@ for x in range(1, 1100):
     uscita = ingresso + delta_to_add if x == 300 else choice(("NULL", ingresso + delta_to_add))
     dep = f"('{cliente}', '{macchina}', '{ingresso}', '{uscita}'),"
     deposito.append(dep)
-    
     transazioni.append(f"('{cliente}', '{macchina}', '{str(ingresso)}', 'acquisizione', '{prezzi[macchina]}')")
+    
     if uscita:
         transazioni.append(f"('{cliente}', '{macchina}', '{str(uscita)}', 'vendita', '{prezzi[macchina]}')")
 
