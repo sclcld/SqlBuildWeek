@@ -1,7 +1,7 @@
  # il codice si baserà su una serie di produzioni e selezioni randomiche di valori che verranno correlate 
-#tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
+#tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
 #chat gpt. 
-#ci sono tante migliorie da apportare, ma il tempo è tiranno.
+#ci sono tante migliorie da effettuare, ma il tempo è tiranno.
 
 from random import randint, choice
 from datetime import date, timedelta
@@ -13,7 +13,7 @@ TEL = "123456"
 marche = ["BMW", "Audi", "Mercedes", "Toyota"]
 colori = ["rosso", "verde", "blu", "giallo", "arancione", "viola", "rosa", "marrone", "grigio", "nero"]
 lettere_maiuscole = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-cilindrate = ["1.2L", "1.6L", "2.0L", "2.5L", "3.0L", "3.5L", "4.0L", "4.5L", "5.0L", "5.5L"]
+cilindrate = [1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600]
 cambio = ["Manuale", "Automatico"]
 citta_italiane = ["Milano", "Roma", "Napoli", "Torino", "Palermo", "Genova", "Bologna", "Firenze", "Bari", "Catania",
                   "Venezia", "Verona", "Messina", "Padova", "Trieste", "Brescia", "Parma", "Taranto", "Prato", "Modena",
@@ -58,7 +58,7 @@ cognomi = [
     "Gallo", "D Amico", "Mazza", "Giuliani", "Rossetti", "Palmieri", "Bernardi", "Martino", "Catalano"
 ]
 
-#mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata combinando lettere ed un numero
+#mentre il numero di telefono sarà un valore di default, la targa è unica e viene generata uniccombinando lettere ed un numero
 #da 100 a 999. Creo una lista e la ripulisco dai duplicati convertendola in set per poi riconvertirla in lista
 
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for numero_targhe in range(1000)]
@@ -77,7 +77,7 @@ for x in range(1,1001):
     cil = choice(cilindrate)
     camb = choice(cambio)
     prezzo = randint(10000, 80000)
-    macchina = f"({x}, '{marca}', '{targa}', '{colore}', '{cil}', '{camb}', '{prezzo}'),"
+    macchina = f"({x}, '{marca}', '{targa}', '{colore}', {cil}, '{camb}', {prezzo}),"
     macchine.append(macchina)
     prezzi[x] = prezzo
 
@@ -92,18 +92,19 @@ for x in range(1,51):
     citta = citta_italiane[x % 30]
     indirizzo = f"{choice(toponom)} {choice(personaggi_Italiani)} {randint(1,120)}"
     responsabile = f"{choice(nomi)} {choice(cognomi)}"
-    filiali.append(f"('{x}', '{citta}', '{indirizzo}', '{TEL}', '{responsabile}'),")
+    filiali.append(f"({x}, '{citta}', '{indirizzo}', '{TEL}', '{responsabile}'),")
 
 #CLIENTI 
 #il processo di creazione dei clienti avviene più o meno nello stesso modo del precedente
 
 clienti= []    
-for x in range(1, 601):
+for x in range(1, 1001):
 
     nome = choice(nomi)
     cognome = choice(cognomi)
     indirizzo = f"{choice(toponom)} {choice(personaggi_Italiani)} {randint(1,120)}"
     cliente = f"({x}, '{nome}', '{cognome}', '{indirizzo}', '{TEL}'),"
+    
     clienti.append(cliente)
 
 
@@ -119,18 +120,20 @@ deposito = []
 transazioni = []
 idTransazioni = 1
 
-for x in range(1, 1100):
+for prim in range(1, 1100):
 
-    cliente = (x + randint(1,20)) % 600
+    cliente = (prim + randint(1,20)) % 600
     cliente = 1 if cliente == 0 else cliente
-    macchina = (x + randint(1,20)) % 1000
+    macchina = (prim + randint(1,20)) % 1000
     macchina = 1 if macchina == 0 else macchina
-    concessionaria = x % 50
+    concessionaria = prim % 50
     delta_to_add = timedelta(days = randint(30, 600))
     start = date(2009, 1, 1)
     ingresso = start + delta_to_add
-    uscita = ingresso + delta_to_add if x == 300 else choice(("NULL", ingresso + delta_to_add))
-    dep = f"({cliente}, {macchina}, {concessionaria},'{ingresso}', '{uscita}')," if uscita != "NULL" else f"({cliente}, {macchina}, {concessionaria},'{ingresso}', NULL),"
+    uscita = ingresso + delta_to_add if prim == 300 else choice(("NULL", ingresso + delta_to_add))
+    dep = f"({prim}, {macchina}, {concessionaria},'{ingresso}', '{uscita}')," if uscita != "NULL" else f"({prim}, {macchina}, {concessionaria},'{ingresso}', NULL),"
+    print(prim)
+    print(dep)
     deposito.append(dep)
     transazioni.append(f"({idTransazioni},{cliente}, {macchina}, '{str(ingresso)}', 'acquisizione', {prezzi[macchina]}, {concessionaria}),")
     idTransazioni += 1
@@ -139,7 +142,7 @@ for x in range(1, 1100):
         idTransazioni += 1
 
 #con with open genero dei file che sono perfettamente formattati per essere direttamente incollati nell'insertion
-# sullo script di sql. Basta solo levare la virgola dopo l'ultimo record di ogni tabella e non genereranno errore :)   
+# sullo script di sql. Basta solo levare la virgola dopo l'ultimo record di ogni tabella e noo genereranno errore :)   
 
 with open("insertions/auto.txt", "a") as file_auto:
 
