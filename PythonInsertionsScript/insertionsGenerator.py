@@ -117,25 +117,26 @@ for x in range(1, 601):
 
 deposito = []
 transazioni = []
+idTransazioni = 1
 
 for x in range(1, 1100):
 
-    cliente = x % 300
+    cliente = (x + randint(1,20)) % 600
     cliente = 1 if cliente == 0 else cliente
-    macchina = x % 1000
+    macchina = (x + randint(1,20)) % 1000
     macchina = 1 if macchina == 0 else macchina
     concessionaria = x % 50
     delta_to_add = timedelta(days = randint(30, 600))
     start = date(2009, 1, 1)
     ingresso = start + delta_to_add
     uscita = ingresso + delta_to_add if x == 300 else choice(("NULL", ingresso + delta_to_add))
-    dep = f"('{cliente}', '{macchina}', '{ingresso}', '{uscita}'),"
+    dep = f"({cliente}, {macchina}, {concessionaria},'{ingresso}', '{uscita}')," if uscita != "NULL" else f"({cliente}, {macchina}, {concessionaria},'{ingresso}', NULL),"
     deposito.append(dep)
-    transazioni.append(f"('{cliente}', '{macchina}', '{str(ingresso)}', 'acquisizione', '{prezzi[macchina]}')")
-    
-    if uscita:
-        transazioni.append(f"('{cliente}', '{macchina}', '{str(uscita)}', 'vendita', '{prezzi[macchina]}')")
-
+    transazioni.append(f"({idTransazioni},{cliente}, {macchina}, '{str(ingresso)}', 'acquisizione', {prezzi[macchina]}, {concessionaria}),")
+    idTransazioni += 1
+    if str(uscita) != "NULL" :
+        transazioni.append(f"({idTransazioni},{cliente}, {macchina}, '{str(uscita)}', 'vendita', {prezzi[macchina]}, {concessionaria}),")
+        idTransazioni += 1
 
 #con with open genero dei file che sono perfettamente formattati per essere direttamente incollati nell'insertion
 # sullo script di sql. Basta solo levare la virgola dopo l'ultimo record di ogni tabella e noo genereranno errore :)   
@@ -169,6 +170,3 @@ with open("insertions/tansazioni.txt", "a") as file_transazioni:
     for transazione in transazioni:
 
         file_transazioni.write(transazione + "\n")
-
-
-
