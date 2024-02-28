@@ -81,7 +81,7 @@ for x in range(1,1001):
 #FILIALI
     
 #viene combinata una citta, un'indicazione toponomastica, un personaggio italiano a caso(avevo chiesto 
-# a chat gpt solo personaggi italiani deceduti e lui di tutta risposta ha inserito nella lista Massimo D'Alema e 
+# a chat gpt solo personaggi italiani deceduti e di tutta risposta ha inserito nella lista Massimo D'Alema e 
 #Gianfranco Fini) un numero civico, il valore TEL ed un nome
     
 filiali = []    
