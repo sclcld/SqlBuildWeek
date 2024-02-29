@@ -485,7 +485,7 @@ insert into auto values
 (426, 'Toyota', 'XF859GF', 'nero', 1600, 'Automatico', 4911),
 (427, 'BMW', 'BK508IW', 'blu', 1800, 'Manuale', 39052),
 (428, 'Audi', 'BD762PT', 'viola', 2000, 'Manuale', 13767),
-(429, 'Audi', 'PJ935HS', 'grigio', 1800, 'Automatico', 22337),
+(429, 'Audi', 'PJ935HS', 'grigio', 1800, 'Automatico', 22337), 
 (430, 'Audi', 'XK100AX', 'rosa', 2000, 'Automatico', 35526),
 (431, 'Audi', 'RE434XZ', 'giallo', 1200, 'Automatico', 14360),
 (432, 'Toyota', 'QP752DX', 'marrone', 2600, 'Automatico', 34088),
