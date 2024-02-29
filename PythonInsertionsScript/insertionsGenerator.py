@@ -122,8 +122,6 @@ cognomi = [
 ]
 
 
-# la targa viene generata selezionando lettere casuali e un valore da 100 a 999 e formattandoli insieme in una stringa.
-#  finita l'esecuzione dello script avremo 1200 righe differenti ripuliti da duplicati tramite conversione in set
 
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for targa in range(1, 1200)]
 targhe = list(set(targhe))[:1001]
@@ -138,19 +136,19 @@ records_clienti = []
 records_deposito = []
 records_transazioni = []
 
-# in questo ciclo for vengono generati in maniela randomica tutti i valor utili per la tabella cliente, la tabella macchina e la tabella concessionaria
-
 
 for index, filiale in enumerate(citta_italiane, start=1):
 
     macchine_per_filiale = targhe[targhe_index : targhe_index + 20]
     indirizzo_filiale = f"{choice(toponimi)} {choice(personaggi_Italiani)} {randint(1,200)}"
+    reg = cittaRegPair[filiale]
     nome_responsabile = f"{choice(nomi)} {choice(cognomi)}"
-    concessionaria_completo = (index, filiale, indirizzo_filiale, TEL, nome_responsabile)
+    concessionaria_completo = (index, filiale, indirizzo_filiale, reg, TEL, nome_responsabile)
     records_concessionarie.append(concessionaria_completo)
     for targa in macchine_per_filiale:
 
         indirizzo_cliente = f"{choice(citta_italiane)}"
+        regione_c = cittaRegPair[indirizzo_cliente]
         marca = choice(marche)
         prezzo = randint(2000, 40000)
         colore = choice(colori)
@@ -161,15 +159,13 @@ for index, filiale in enumerate(citta_italiane, start=1):
         nome_cliente = f"{choice(nomi)}"
         cognome_cliente = f"{choice(cognomi)}"
         auto_completo = (id_mac, marca, targa, colore, cilindrata, cambio, prezzo)
-        cliente_completo = (id_cli, nome_cliente, cognome_cliente, indirizzo_cliente, TEL)
+        cliente_completo = (id_cli, nome_cliente, cognome_cliente, indirizzo_cliente, regione_c, TEL)
         records_auto.append(auto_completo)
         records_clienti.append(cliente_completo)
         
     targhe_index += 20
     
 
-# al fine di provare a garantire la coerenza dei dati, le chiavi primarie verrano inserite in modo consecutivo e crescente. Le chiavi secondarie
-# verranno selezionate randomicamente in un range prestabilito. La vendita viene assegnata in modo casuale.
 
 for trans_id, aut in enumerate(records_auto, start=1):
     id_client = randint(1,999)
@@ -181,8 +177,6 @@ for trans_id, aut in enumerate(records_auto, start=1):
     records_deposito.append(deposito_completo)
 
 record_id = 1
-
-#ogni transazione dopo essere stata inserita nella sua lista, viene analizzata ed a secondo che sia una data o null cmbierà la formattazione della stringa
 
 for index, record in enumerate(records_deposito, start = 1):
     rec = record[1:]
@@ -196,54 +190,48 @@ for index, record in enumerate(records_deposito, start = 1):
         record_id += 1
         records_transazioni.append(vendita_completa)
 
-# con questi with open
-
-with open("insertions/auto.txt", "a") as file_auto:
-
-    for auto in records_auto:
-
-        a,b,c,d,e,f,g = auto
-        to_write =f"({a}, '{b}', '{c}', '{d}', {e}, '{f}', {g}),\n"
-        file_auto.write(to_write)
 
 
-with open("insertions/cliente.txt", "a") as file_clienti:
+# with open("insertions/auto.txt", "a") as file_auto:
 
-    for cliente in records_clienti:
-        a, b, c, d, e = cliente
-        to_write =  f"({a},'{b}', '{c}', '{d}', {TEL}),\n"
-        file_clienti.write(to_write)
+#     for auto in records_auto:
+
+#         a,b,c,d,e,f,g = auto
+#         to_write =f"({a}, '{b}', '{c}', '{d}', {e}, '{f}', {g}),\n"
+#         file_auto.write(to_write)
+
+
+# with open("insertions/cliente.txt", "a") as file_clienti:
+
+#     for cliente in records_clienti:
+#         a, b, c, d, e, f = cliente
+#         to_write =  f"({a},'{b}', '{c}', '{d}', '{e}', {TEL}),\n"
+#         print(to_write)
+#         file_clienti.write(to_write)
 
 with open("insertions/concessionaria.txt", "a") as file_concessionaria:
 
     for concessionaria in records_concessionarie:
         
-        a, b, c, d, f = concessionaria 
-        to_write = f"({a}, '{b}', '{c}', '{d}', '{f}'),\n"    
-        file_concessionaria.write(to_write)
+       a,b,c,d,e,f = concessionaria
+       to_write = f"({a}, '{b}', '{c}', '{d}', '{e}', '{f}'),\n"
+       file_concessionaria.write(to_write)
 
-with open("insertions/deposito.txt", "a") as file_deposito:
+# with open("insertions/deposito.txt", "a") as file_deposito:
 
     
-    for deposito in records_deposito:
+#     for deposito in records_deposito:
         
-        a, b, c, d, e = deposito
-        ap = "'" if e != "NULL" else ""
-        to_write = f"({a}, {b}, {c}, '{d}', {ap}{e}{ap}),\n"
-        file_deposito.write(to_write)    
+#         a, b, c, d, e = deposito
+#         ap = "'" if e != "NULL" else ""
+#         to_write = f"({a}, {b}, {c}, '{d}', {ap}{e}{ap}),\n"
+#         file_deposito.write(to_write)    
 
-with open("insertions/transazione.txt", "a") as file_transazione:
+# with open("insertions/transazione.txt", "a") as file_transazione:
 
-    for trans in records_transazioni :
+#     for trans in records_transazioni :
 
-        a, b, c, d, e, f, g = trans
-        to_write = f"({a}, {b}, {c}, '{d}', '{e}', {f}, {g}),\n" 
-        file_transazione.write(to_write)
-
-
-
-with open("insertions/citReg.txt", "a") as citReg:
-
-    for a in cittaRegPair:
-
-        citReg.write(f"('{a}', '{cittaRegPair[a]}'),\n")       
+#         a, b, c, d, e, f, g = trans
+#         to_write = f"({a}, {b}, {c}, '{d}', '{e}', {f}, {g}),\n" 
+#         file_transazione.write(to_write)
+    
