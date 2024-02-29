@@ -27,7 +27,57 @@ citta_italiane = [
                   "Bolzano", "Novara", "Piacenza", "Ancona", "Andria",
                   "Udine", "Cosenza", "Sassuolo", "La Spezia", "Livorno", "Trapani"
 ]
-
+cittaRegPair  = {
+    "Roma": "Lazio",
+    "Milano": "Lombardia",
+    "Napoli": "Campania",
+    "Torino": "Piemonte",
+    "Palermo": "Sicilia",
+    "Genova": "Liguria",
+    "Bologna": "Emilia-Romagna",
+    "Firenze": "Toscana",
+    "Bari": "Puglia",
+    "Catania": "Sicilia",
+    "Venezia": "Veneto",
+    "Verona": "Veneto",
+    "Messina": "Sicilia",
+    "Padova": "Veneto",
+    "Trieste": "Friuli-Venezia Giulia",
+    "Brescia": "Lombardia",
+    "Taranto": "Puglia",
+    "Prato": "Toscana",
+    "Modena": "Emilia-Romagna",
+    "Reggio Calabria": "Calabria",
+    "Reggio Emilia": "Emilia-Romagna",
+    "Perugia": "Umbria",
+    "Ravenna": "Emilia-Romagna",
+    "Livorno": "Toscana",
+    "Cagliari": "Sardegna",
+    "Foggia": "Puglia",
+    "Rimini": "Emilia-Romagna",
+    "Salerno": "Campania",
+    "Ferrara": "Emilia-Romagna",
+    "Sassari": "Sardegna",
+    "Latina": "Lazio",
+    "Monza": "Lombardia",
+    "Siracusa": "Sicilia",
+    "Pescara": "Abruzzo",
+    "Bergamo": "Lombardia",
+    "Forlì": "Emilia-Romagna",
+    "Trento": "Trentino-Alto Adige",
+    "Vicenza": "Veneto",
+    "Terni": "Umbria",
+    "Bolzano": "Trentino-Alto Adige",
+    "Novara": "Piemonte",
+    "Piacenza": "Emilia-Romagna",
+    "Ancona": "Marche",
+    "Andria": "Puglia",
+    "Udine": "Friuli-Venezia Giulia",
+    "Cosenza": "Calabria",
+    "Sassuolo": "Emilia-Romagna",
+    "La Spezia": "Liguria",
+    "Trapani": "Sicilia"
+}
 toponimi = ["Via", "Largo", "Viale", "Piazza"]
 personaggi_Italiani= personaggi_italiani = [
     "Leonardo da Vinci", "Marco Polo", "Dante Alighieri", "Michelangelo Buonarroti", "Galileo Galilei",
@@ -72,6 +122,8 @@ cognomi = [
 ]
 
 
+# la targa viene generata selezionando lettere casuali e un valore da 100 a 999 e formattandoli insieme in una stringa.
+#  finita l'esecuzione dello script avremo 1200 righe differenti ripuliti da duplicati tramite conversione in set
 
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for targa in range(1, 1200)]
 targhe = list(set(targhe))[:1001]
@@ -86,6 +138,8 @@ records_clienti = []
 records_deposito = []
 records_transazioni = []
 
+# in questo ciclo for vengono generati in maniela randomica tutti i valor utili per la tabella cliente, la tabella macchina e la tabella concessionaria
+
 
 for index, filiale in enumerate(citta_italiane, start=1):
 
@@ -96,7 +150,7 @@ for index, filiale in enumerate(citta_italiane, start=1):
     records_concessionarie.append(concessionaria_completo)
     for targa in macchine_per_filiale:
 
-        indirizzo_cliente = f"{choice(toponimi)} {choice(personaggi_Italiani)} {randint(1,200)}"
+        indirizzo_cliente = f"{choice(citta_italiane)}"
         marca = choice(marche)
         prezzo = randint(2000, 40000)
         colore = choice(colori)
@@ -114,6 +168,8 @@ for index, filiale in enumerate(citta_italiane, start=1):
     targhe_index += 20
     
 
+# al fine di provare a garantire la coerenza dei dati, le chiavi primarie verrano inserite in modo consecutivo e crescente. Le chiavi secondarie
+# verranno selezionate randomicamente in un range prestabilito. La vendita viene assegnata in modo casuale.
 
 for trans_id, aut in enumerate(records_auto, start=1):
     id_client = randint(1,999)
@@ -125,6 +181,8 @@ for trans_id, aut in enumerate(records_auto, start=1):
     records_deposito.append(deposito_completo)
 
 record_id = 1
+
+#ogni transazione dopo essere stata inserita nella sua lista, viene analizzata ed a secondo che sia una data o null cmbierà la formattazione della stringa
 
 for index, record in enumerate(records_deposito, start = 1):
     rec = record[1:]
@@ -138,7 +196,7 @@ for index, record in enumerate(records_deposito, start = 1):
         record_id += 1
         records_transazioni.append(vendita_completa)
 
-
+# con questi with open
 
 with open("insertions/auto.txt", "a") as file_auto:
 
@@ -181,3 +239,11 @@ with open("insertions/transazione.txt", "a") as file_transazione:
         a, b, c, d, e, f, g = trans
         to_write = f"({a}, {b}, {c}, '{d}', '{e}', {f}, {g}),\n" 
         file_transazione.write(to_write)
+
+
+
+with open("insertions/citReg.txt", "a") as citReg:
+
+    for a in cittaRegPair:
+
+        citReg.write(f"('{a}', '{cittaRegPair[a]}'),\n")       
