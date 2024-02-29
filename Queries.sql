@@ -40,3 +40,42 @@ group by cns.concessionaria_id
 
 /*6)------------------------------------------------------------------------------------*/
 /*Il Responsabile di Concessionaria di tutte le auto con Cambio Automatico e Anno Acquisto 2010*/
+
+select cns.responsabile as responsabile, year(trx.data) as data, count(trx.auto_id) as numero_auto, cns.città as numero_auto 
+from transazione trx
+join concessionaria cns
+on cns.concessionaria_id=trx.concessionaria_id
+join auto
+on auto.auto_id=trx.auto_id
+where auto.tipo_cambio = 'Automatico' and year(trx.data) = '2010'
+group by responsabile, year(trx.data), cns.città
+order by numero_auto desc
+limit 5;
+
+-- Per ciascuna TARGA il colore, il prezzo e la città in cui si trova il veicolo
+
+select auto.targa, auto.colore, auto.prezzo, cns.città,auto.marca
+from transazione trx
+join auto
+on auto.auto_id = trx.auto_id
+join concessionaria cns
+on cns.concessionaria_id=trx.concessionaria_id
+order by cns.città;
+
+-- Le auto con almeno tre Proprietari.
+
+SELECT trx.auto_id, auto.targa, auto.marca, trx.tipo
+from transazione trx
+join auto
+on auto.auto_id=trx.auto_id
+where trx.tipo = 'Vendita'
+group by trx.auto_id
+having COUNT(trx.auto_id) >= 3;
+
+-- La targa delle auto vendute nel 2015
+
+SELECT auto.targa, auto.marca, trx.data 
+from transazione trx
+join auto
+on auto.auto_id=trx.auto_id
+where trx.tipo = 'Vendita' and  year(trx.data) = 2004;
