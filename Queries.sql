@@ -79,3 +79,11 @@ from transazione trx
 join auto
 on auto.auto_id=trx.auto_id
 where trx.tipo = 'Vendita' and  year(trx.data) = 2004;
+
+---La regione con più auto (trovare un modo per associare la Regione)
+SELECT c.regione, COUNT(*) AS numero_auto
+FROM auto a
+JOIN cliente c ON a.auto_id = c.cliente_id
+GROUP BY c.regione
+ORDER BY numero_auto DESC
+LIMIT 1;
