@@ -15,7 +15,7 @@ join cliente clt on clt.cliente_id = trz.cliente_id order by transazione_id;
 
 /*3)------------------------------------------------------------------------------------*/
 /*Costo totale di tutte le auto con Cilindrata superiore a 1600lo c14*/
-select SUM(prezzo) costo_totale from auto aut where auto_id NOT IN (
+select SUM(prezzo) costo_totale,COUN() from auto aut where auto_id NOT IN (
 select distinct auto_id from transazione trz where trz.tipo = "VENDITA") and cilindrata > 2000;
 
 /*4)------------------------------------------------------------------------------------*/
@@ -32,11 +32,11 @@ where cns.città = "ROMA";
 /*5)------------------------------------------------------------------------------------*/
 /*Per ogni Concessionaria, il numero di Auto*/
 
-select COUNT(cns.numero )as auto, cns.numero  from deposito dpt 
+select COUNT(cns.concessionaria_id )as auto, cns.concessionaria_id  from deposito dpt 
 join concessionaria cns on dpt.concessionaria_id = cns.concessionaria_id 
 where dpt.auto_id 
 not in (select trz.auto_id as data from transazione trz where trz.tipo = "VENDITA" group by trz.auto_id)
-group by cns.concessionaria_id
+group by cns.concessionaria_id;
 
 /*6)------------------------------------------------------------------------------------*/
 /*Il Responsabile di Concessionaria di tutte le auto con Cambio Automatico e Anno Acquisto 2010*/
@@ -54,7 +54,7 @@ limit 5;
 
 -- Per ciascuna TARGA il colore, il prezzo e la città in cui si trova il veicolo
 
-select auto.targa, auto.colore, auto.prezzo, cns.città,auto.marca
+select auto.targa, auto.colore, auto.prezzo, cns.città, auto.marca
 from transazione trx
 join auto
 on auto.auto_id = trx.auto_id
@@ -80,7 +80,7 @@ join auto
 on auto.auto_id=trx.auto_id
 where trx.tipo = 'Vendita' and  year(trx.data) = 2004;
 
----La regione con più auto (trovare un modo per associare la Regione)
+-- La regione con più auto (trovare un modo per associare la Regione)
 SELECT c.regione, COUNT(*) AS numero_auto
 FROM auto a
 JOIN cliente c ON a.auto_id = c.cliente_id
