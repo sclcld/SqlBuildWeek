@@ -1,6 +1,7 @@
  # il codice si baserà su una serie di produzioni e selezioni randomiche di valori che verranno correlate 
-#tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
-#chat gpt. Ogni generazione casuale verrà effettuata nell'ambito di range prestabiliti, in modo 
+# tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random dizionari python. 
+# Le liste dalle quali avvengono le scelte sono sta generate in gran parte con chat gpt. 
+# Ogni generazione casuale verrà effettuata nell'ambito di range prestabiliti, in modo 
 # da provare a garantire la coerenza dei dati
 
 from random import randint, choice
