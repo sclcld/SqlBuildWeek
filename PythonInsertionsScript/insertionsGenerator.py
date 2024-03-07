@@ -1,32 +1,18 @@
  # il codice si baserà su una serie di produzioni e selezioni randomiche di valori che verranno correlate 
 #tra loro tramite iterazioni su liste e dizionari e l'ultillizzo del modulo random dizionari python. Le liste dalle quali avvengono le scelte sono sta generate in gran parte con 
-#chat gpt. 
-#ci sono tante migliorie da effettuare, ma il tempo è tiranno.
+#chat gpt. Ogni generazione casuale verrà effettuata nell'ambito di range prestabiliti, in modo 
+# da provare a garantire la coerenza dei dati
 
 from random import randint, choice
 from datetime import date, timedelta
 
 TEL = "123456"
 
-#le macchine verranno generate da una combinazione randomica dei seguenti valori
-
 marche = ["BMW", "Audi", "Mercedes", "Toyota"]
 colori = ["rosso", "verde", "blu", "giallo", "arancione", "viola", "rosa", "marrone", "grigio", "nero"]
-lettere_maiuscole = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+lettere_maiuscole = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 cilindrate = [1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600]
-cambi = ["Manuale", "Automatico"]
-citta_italiane = [
-                  "Roma", "Milano", "Napoli", "Torino", "Palermo",
-                  "Genova", "Bologna", "Firenze", "Bari", "Catania",
-                  "Venezia", "Verona", "Messina", "Padova", "Trieste",
-                  "Brescia", "Taranto", "Prato", "Modena", "Reggio Calabria",
-                  "Reggio Emilia", "Perugia", "Ravenna", "Livorno", "Cagliari",
-                  "Foggia", "Rimini", "Salerno", "Ferrara", "Sassari",
-                  "Latina", "Monza", "Siracusa", "Pescara",
-                  "Bergamo", "Forlì", "Trento", "Vicenza", "Terni",
-                  "Bolzano", "Novara", "Piacenza", "Ancona", "Andria",
-                  "Udine", "Cosenza", "Sassuolo", "La Spezia", "Livorno", "Trapani"
-]
+cambi = ["Manuale" ,"Automatico"]
 cittaRegPair  = {
     "Roma": "Lazio",
     "Milano": "Lombardia",
@@ -79,6 +65,7 @@ cittaRegPair  = {
     "Trapani": "Sicilia"
 }
 toponimi = ["Via", "Largo", "Viale", "Piazza"]
+
 personaggi_Italiani= personaggi_italiani = [
     "Leonardo da Vinci", "Marco Polo", "Dante Alighieri", "Michelangelo Buonarroti", "Galileo Galilei",
     "Giuseppe Garibaldi", "Niccolò Machiavelli", "Giotto di Bondone", "Amerigo Vespucci", "Caravaggio",
@@ -125,6 +112,7 @@ cognomi = [
 
 targhe = [f"{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}{randint(100, 999)}{choice(lettere_maiuscole)}{choice(lettere_maiuscole)}" for targa in range(1, 1200)]
 targhe = list(set(targhe))[:1001]
+
 targhe_index = 0
 transazioni_index = 0
 id_macchina = list(range(1,1100))
@@ -137,7 +125,7 @@ records_deposito = []
 records_transazioni = []
 
 
-for index, filiale in enumerate(citta_italiane, start=1):
+for index, filiale in enumerate(list(cittaRegPair.keys()), start=1):
 
     macchine_per_filiale = targhe[targhe_index : targhe_index + 20]
     indirizzo_filiale = f"{choice(toponimi)} {choice(personaggi_Italiani)} {randint(1,200)}"
@@ -147,7 +135,7 @@ for index, filiale in enumerate(citta_italiane, start=1):
     records_concessionarie.append(concessionaria_completo)
     for targa in macchine_per_filiale:
 
-        indirizzo_cliente = f"{choice(citta_italiane)}"
+        indirizzo_cliente = choice(list(cittaRegPair.keys()))
         regione_c = cittaRegPair[indirizzo_cliente]
         marca = choice(marche)
         prezzo = randint(2000, 40000)
@@ -192,22 +180,22 @@ for index, record in enumerate(records_deposito, start = 1):
 
 
 
-# with open("insertions/auto.txt", "a") as file_auto:
+with open("insertions/auto.txt", "a") as file_auto:
 
-#     for auto in records_auto:
+    for auto in records_auto:
 
-#         a,b,c,d,e,f,g = auto
-#         to_write =f"({a}, '{b}', '{c}', '{d}', {e}, '{f}', {g}),\n"
-#         file_auto.write(to_write)
+        a,b,c,d,e,f,g = auto
+        to_write =f"({a}, '{b}', '{c}', '{d}', {e}, '{f}', {g}),\n"
+        file_auto.write(to_write)
 
 
-# with open("insertions/cliente.txt", "a") as file_clienti:
+with open("insertions/cliente.txt", "a") as file_clienti:
 
-#     for cliente in records_clienti:
-#         a, b, c, d, e, f = cliente
-#         to_write =  f"({a},'{b}', '{c}', '{d}', '{e}', {TEL}),\n"
-#         print(to_write)
-#         file_clienti.write(to_write)
+    for cliente in records_clienti:
+        a, b, c, d, e, f = cliente
+        to_write =  f"({a},'{b}', '{c}', '{d}', '{e}', {TEL}),\n"
+        print(to_write)
+        file_clienti.write(to_write)
 
 with open("insertions/concessionaria.txt", "a") as file_concessionaria:
 
@@ -217,21 +205,21 @@ with open("insertions/concessionaria.txt", "a") as file_concessionaria:
        to_write = f"({a}, '{b}', '{c}', '{d}', '{e}', '{f}'),\n"
        file_concessionaria.write(to_write)
 
-# with open("insertions/deposito.txt", "a") as file_deposito:
+with open("insertions/deposito.txt", "a") as file_deposito:
 
     
-#     for deposito in records_deposito:
+    for deposito in records_deposito:
         
-#         a, b, c, d, e = deposito
-#         ap = "'" if e != "NULL" else ""
-#         to_write = f"({a}, {b}, {c}, '{d}', {ap}{e}{ap}),\n"
-#         file_deposito.write(to_write)    
+        a, b, c, d, e = deposito
+        ap = "'" if e != "NULL" else ""
+        to_write = f"({a}, {b}, {c}, '{d}', {ap}{e}{ap}),\n"
+        file_deposito.write(to_write)    
 
-# with open("insertions/transazione.txt", "a") as file_transazione:
+with open("insertions/transazione.txt", "a") as file_transazione:
 
-#     for trans in records_transazioni :
+    for trans in records_transazioni :
 
-#         a, b, c, d, e, f, g = trans
-#         to_write = f"({a}, {b}, {c}, '{d}', '{e}', {f}, {g}),\n" 
-#         file_transazione.write(to_write)
+        a, b, c, d, e, f, g = trans
+        to_write = f"({a}, {b}, {c}, '{d}', '{e}', {f}, {g}),\n" 
+        file_transazione.write(to_write)
     
